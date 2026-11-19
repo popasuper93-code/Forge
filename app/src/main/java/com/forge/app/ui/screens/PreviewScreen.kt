@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -104,7 +105,12 @@ fun PreviewScreen(
             }
         }
 
-        Box(Modifier = Modifier.fillMaxWidth().height(1.dp).background(Border))
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(1.dp)
+                .background(Border)
+        )
 
         if (showPush) {
             Column(
@@ -160,21 +166,29 @@ fun PreviewScreen(
                     enabled = phase != AgentPhase.PUSHING && ghReady,
                     colors = ButtonDefaults.buttonColors(containerColor = Surface, contentColor = TextPrimary),
                     shape = RoundedCornerShape(8.dp),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .border(1.dp, Border, RoundedCornerShape(8.dp))
+                    modifier = Modifier.fillMaxWidth()
                 ) {
                     Text("Create repo and push")
                 }
                 if (phase == AgentPhase.PUSHING) {
                     Spacer(modifier = Modifier.height(10.dp))
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        CircularProgressIndicator(modifier = Modifier.height(14.dp).padding(end = 8.dp), strokeWidth = 2.dp, color = Accent)
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(16.dp),
+                            color = Accent,
+                            strokeWidth = 2.dp
+                        )
+                        Spacer(modifier = Modifier.size(8.dp))
                         Text(status ?: "Working...", color = TextMuted, fontSize = 12.sp)
                     }
                 }
             }
-            Box(modifier = Modifier.fillMaxWidth().height(1.dp).background(Border))
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(1.dp)
+                    .background(Border)
+            )
         }
 
         if (error != null) {
@@ -196,7 +210,10 @@ fun PreviewScreen(
         }
 
         if (html.isNullOrBlank()) {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
                 Text("No preview yet", color = TextMuted)
             }
         } else {
