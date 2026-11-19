@@ -1,0 +1,14 @@
+package com.forge.app
+
+import android.app.Application
+import com.forge.app.data.SettingsRepository
+
+class ForgeApp : Application() {
+    lateinit var settings: SettingsRepository
+        private set
+
+    override fun onCreate() {
+        super.onCreate()
+        settings = SettingsRepository(this)
+    }
+}
